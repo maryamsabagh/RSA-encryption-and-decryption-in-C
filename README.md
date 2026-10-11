@@ -1,20 +1,20 @@
 # RSA Encryption and Decryption in C
 
-A from-scratch implementation of textbook RSA in C. It generates a key pair from two primes, then encrypts and decrypts a text message one character at a time.
+A from-scratch implementation of RSA algorithm in C. It generates a key pair from two primes, then encrypts and decrypts a text message one character at a time.
 
 ## How it works
 
-1. Pick two different primes **p** and **q**.
-2. Compute **n = p × q** and **φ = (p − 1)(q − 1)**.
-3. Choose **e** such that **gcd(e, φ) = 1**.
-4. Find **d** such that **(e × d) mod φ = 1**, using the extended Euclidean algorithm.
+1. Pick two different primes $p$ and $q$.
+2. Compute $n = p \times q$ and $\varphi = (p - 1)(q - 1)$.
+3. Choose $e$ such that $\gcd(e, \varphi) = 1$.
+4. Find $d$ such that $e \cdot d \equiv 1 \pmod{\varphi}$, using the extended Euclidean algorithm.
 
-- Public key: **(e, n)**
-- Private key: **(d, n)**
-- Encrypt: **c = mᵉ mod n**
-- Decrypt: **m = cᵈ mod n**
+- Public key: $(e, n)$
+- Private key: $(d, n)$
 
-Each character's ASCII code is used as **m**. Since m must be smaller than n, the program requires **n > 127**.
+$$c = m^e \bmod n \qquad\qquad m = c^d \bmod n$$
+
+Each character's ASCII code is used as $m$. Since $m$ must be smaller than $n$, the program requires $n > 127$.
 
 ## Files
 
@@ -48,6 +48,6 @@ Decrypted message: Hi
 ## Limitations
 
 This is a learning project, not secure cryptography:
-- Uses small primes and `int`, so n must stay below about 46,000 to avoid overflow.
+- Uses small primes and `int`, so $n$ must stay below about 46,000 to avoid overflow.
 - Encrypts letter by letter, so the same letter always produces the same number.
 - No padding (real RSA uses schemes like OAEP).
